@@ -73,6 +73,17 @@ module.exports = function(app, passport, auth) {
     //Finish with setting up the articleId param
     app.param('articleId', articles.article);
 
+    //Comment Routes
+    var comments = require('../app/controllers/comments');
+    app.get('/comments', comments.all);
+    app.post('/comments', auth.requiresLogin, comments.create);
+    app.get('/comments/:commentId', comments.show);
+    app.put('/comments/:commentId', auth.requiresLogin, auth.comment.hasAuthorization, comments.update);
+    app.del('/comments/:commentId', auth.requiresLogin, auth.comment.hasAuthorization, comments.destroy);
+
+    //Finish with setting up the commentId param
+    app.param('commentId', comments.comment);
+
     //Home route
     var index = require('../app/controllers/index');
     app.get('/', index.render);

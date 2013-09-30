@@ -31,3 +31,14 @@ exports.article = {
         next();
     }
 };
+/**
+ * Article authorizations routing middleware
+ */
+exports.comment = {
+    hasAuthorization: function(req, res, next) {
+        if (req.comment.user.id != req.user.id) {
+            return res.send(401, 'User is not authorized');
+        }
+        next();
+    }
+};
