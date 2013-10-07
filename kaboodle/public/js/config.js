@@ -14,17 +14,17 @@ window.app.config(['$routeProvider',
             when('/articles/:articleId', {
                 templateUrl: 'views/articles/view.html'
             }).
-            when('/connections', {
-                templateUrl: 'views/connections/list.html'
+            when('/projects', {
+                templateUrl: 'views/projects/list.html'
             }).
-            when('/connections/create', {
-                templateUrl: 'views/connections/create.html'
+            when('/projects/create', {
+                templateUrl: 'views/projects/create.html'
             }).
-            when('/connections/:connectionId/edit', {
-                templateUrl: 'views/connections/edit.html'
+            when('/projects/:projectId/edit', {
+                templateUrl: 'views/projects/edit.html'
             }).
-            when('/connections/:connectionId', {
-                templateUrl: 'views/connections/view.html'
+            when('/projects/:projectId', {
+                templateUrl: 'views/projects/view.html'
             }).
         when('/', {
             templateUrl: 'views/index.html'

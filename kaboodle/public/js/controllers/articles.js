@@ -1,52 +1,53 @@
-angular.module('mean.connections').controller('ConnectionsController', ['$scope', '$routeParams', '$location', 'Global', 'Connections', function ($scope, $routeParams, $location, Global, Connections) {
+angular.module('mean.articles').controller('ArticlesController', ['$scope', '$routeParams', '$location', 'Global', 'Articles', function ($scope, $routeParams, $location, Global, Articles) {
     $scope.global = Global;
 
     $scope.create = function() {
-        var connection = new Connections({
+        console.log("Try create");
+        var article = new Articles({
             title: this.title,
             content: this.content
         });
-        connection.$save(function(response) {
-            $location.path("connections/" + response._id);
+        article.$save(function(response) {
+            $location.path("articles/" + response._id);
         });
 
         this.title = "";
         this.content = "";
     };
 
-    $scope.remove = function(connection) {
-        connection.$remove();  
+    $scope.remove = function(article) {
+        article.$remove();  
 
-        for (var i in $scope.connections) {
-            if ($scope.connections[i] == connection) {
-                $scope.connections.splice(i, 1);
+        for (var i in $scope.articles) {
+            if ($scope.articles[i] == article) {
+                $scope.articles.splice(i, 1);
             }
         }
     };
 
     $scope.update = function() {
-        var connection = $scope.connection;
-        if (!connection.updated) {
-            connection.updated = [];
+        var article = $scope.article;
+        if (!article.updated) {
+            article.updated = [];
         }
-        connection.updated.push(new Date().getTime());
+        article.updated.push(new Date().getTime());
 
-        connection.$update(function() {
-            $location.path('connections/' + connection._id);
+        article.$update(function() {
+            $location.path('articles/' + article._id);
         });
     };
 
     $scope.find = function(query) {
-        Connections.query(query, function(connections) {
-            $scope.connections = connections;
+        Articles.query(query, function(articles) {
+            $scope.articles = articles;
         });
     };
 
     $scope.findOne = function() {
-        Connections.get({
-            connectionId: $routeParams.connectionId
-        }, function(connection) {
-            $scope.connection = connection;
+        Articles.get({
+            articleId: $routeParams.articleId
+        }, function(article) {
+            $scope.article = article;
         });
     };
 }]);

@@ -23,6 +23,7 @@ exports.article = function(req, res, next, id) {
  * Create a article
  */
 exports.create = function(req, res) {
+    console.log('Articles Create');
     var article = new Article(req.body);
     article.user = req.user;
 
@@ -79,6 +80,7 @@ exports.show = function(req, res) {
  * List of Articles
  */
 exports.all = function(req, res) {
+    console.log('Articles');
     Article.find().sort('-created').populate('user', 'name username').exec(function(err, articles) {
         if (err) {
             res.render('error', {

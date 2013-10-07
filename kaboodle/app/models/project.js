@@ -7,9 +7,9 @@ var mongoose = require('mongoose'),
 
 
 /**
- * Connection Schema environments conmnected to
+ * Project Schema
  */
-var ConnectionSchema = new Schema({
+var ProjectSchema = new Schema({
     created: {
         type: Date,
         default: Date.now
@@ -19,17 +19,7 @@ var ConnectionSchema = new Schema({
         default: '',
         trim: true
     },
-    siteUrl: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    connectAsUser: {
-        type: String,
-        default: '',
-        trim: true
-    },
-    connectAsPassword: {
+    content: {
         type: String,
         default: '',
         trim: true
@@ -43,14 +33,14 @@ var ConnectionSchema = new Schema({
 /**
  * Validations
  */
-ConnectionSchema.path('title').validate(function(title) {
+ProjectSchema.path('title').validate(function(title) {
     return title.length;
 }, 'Title cannot be blank');
 
 /**
  * Statics
  */
-ConnectionSchema.statics = {
+ProjectSchema.statics = {
     load: function(id, cb) {
         this.findOne({
             _id: id
@@ -58,4 +48,4 @@ ConnectionSchema.statics = {
     }
 };
 
-mongoose.model('Connection', ConnectionSchema);
+mongoose.model('Project', ProjectSchema);
