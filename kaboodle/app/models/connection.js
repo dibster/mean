@@ -1,0 +1,61 @@
+/**
+ * Module dependencies.
+ */
+var mongoose = require('mongoose'),
+    config = require('../../config/config'),
+    Schema = mongoose.Schema;
+
+
+/**
+ * Connection Schema environments conmnected to
+ */
+var ConnectionSchema = new Schema({
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    title: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    siteUrl: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    connectAsUser: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    connectAsPassword: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    }
+});
+
+/**
+ * Validations
+ */
+ConnectionSchema.path('title').validate(function(title) {
+    return title.length;
+}, 'Title cannot be blank');
+
+/**
+ * Statics
+ */
+ConnectionSchema.statics = {
+    load: function(id, cb) {
+        this.findOne({
+            _id: id
+        }).populate('user', 'name username').exec(cb);
+    }
+};
+
+mongoose.model('Connection', ConnectionSchema);

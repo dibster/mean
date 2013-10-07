@@ -84,6 +84,17 @@ module.exports = function(app, passport, auth) {
     //Finish with setting up the commentId param
     app.param('commentId', comments.comment);
 
+    //Connection Routes
+    var connections = require('../app/controllers/connections');
+    app.get('/connections', connections.all);
+    app.post('/connections', connections.create);
+    app.get('/connections/:connectionId', connections.show);
+    app.put('/connections/:connectionId', connections.update);
+    app.del('/connections/:connectionId', connections.destroy);
+//
+    //Finish with setting up the connectionId param
+    app.param('connectionId', connections.connection);
+
     //Home route
     var index = require('../app/controllers/index');
     app.get('/', index.render);
