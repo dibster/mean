@@ -4,7 +4,7 @@
             <li>
                 <a class="navbar-brand" href="/">KABOODLE - Config</a>
             </li>
-            <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" ng-class="{active: $uiRoute}">
+            <li data-ng-repeat="item in menu" data-ng-show="global.user" ui-route="/{{item.link}}" data-ng-class="{active: $uiRoute}">
                 <a href="#!/{{item.link}}">{{item.title}}</a>
             </li>
         </ul>
@@ -15,7 +15,9 @@
                 </li>
                 <li>
                     <a href="signin">Signin</a>
+
                 </li>
+
             </ul>
         </div>
     <!--<ul class="nav navbar-nav" data-ng-show="global.authenticated">-->

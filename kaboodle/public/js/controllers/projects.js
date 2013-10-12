@@ -8,11 +8,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
             content: this.content
         });
         project.$save(function(response) {
-            $location.path("projects/" + response._id);
+            $location.path("projects");
         });
 
         this.title = "";
         this.content = "";
+        find();
+
     };
 
     $scope.remove = function(project) {
@@ -38,6 +40,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     };
 
     $scope.find = function(query) {
+
         Projects.query(query, function(projects) {
             $scope.projects = projects;
         });
