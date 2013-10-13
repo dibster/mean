@@ -2,42 +2,55 @@
 
     <h1 id="overview"></h1>
 
-    <form class="form-inline" role="form" data-ng-submit="create()">
-        <div class="form-group">
-            <input type="text" data-ng-model="title" class="form-control" id="title" placeholder="New Field" required autofocus="autofocus">
+    <div class="row">
+        <div class="col-md-8">
+            <form class="form-inline" role="form" data-ng-submit="create()">
+                <div class="form-group">
+                    <input type="text" data-ng-model="title" class="form-control" id="title" placeholder="New Field" required autofocus="autofocus">
+                </div>
+                <div class="form-group">
+                    <select class="form-control" data-ng-model="type" id="type" >
+                        <option>Date</option>
+                        <option>Date and Time</option>
+                        <option>Line</option>
+                        <option>List</option>
+                        <option>Number</option>
+                        <option>Money</option>
+                        <option>Paragraph</option>
+                        <option>Users</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" data-ng-show="type=='Number'" data-ng-model="length" class="form-control" id="length" placeholder="Length ..." required>
+                </div>
+
+                <button type="submit" class="btn btn-default">Add</button>
+          </form>
         </div>
-        <div class="form-group">
-            <!--<input type="text" data-ng-model="type" class="form-control" id="type" placeholder="Type" required>-->
-            <select class="form-control" data-ng-model="type" id="type" >
-                <option>Line</option>
-                <option>Paragraph</option>
-                <option>Date</option>
-                <option>Date and Time</option>
-                <option>Number</option>
-                <option>Money</option>
-            </select>
+
+        <div class="col-md-4">
+            <input type="text" data-ng-model="searchText" class="form-control" id="searchText" size="30" placeholder="Search Table ...">
         </div>
-            <button type="submit" class="btn btn-default">Add</button>
-    </form>
+
+    </div>
 
     <br>
 
-
     <table class="table">
-    <tr data-ng-repeat="field in fields" data-ng-model="title">
-        <td>
-            <a data-ng-href="#!/fields/{{field._id}}">{{field.title}}</a>
-        </td>
-
-        <td>
-            {{field.type}}
-        </td>
-
-
-        <!--<td>-->
-            <!--{{field._id }}-->
-        <!--</td>-->
-
+    <!-- | filter:title-->
+        <tr data-ng-repeat="field in fields | filter:searchText" data-ng-model="title">
+            <td>
+                <a data-ng-href="#!/fields/{{field._id}}">{{field.title}}</a>
+            </td>
+            <td>
+                {{field.type}}
+            </td>
+            <td>
+                {{field.created | date:'medium'}}
+            </td>
+            <td>
+                {{field.user.name}}
+            </td>
         </tr>
     </table>
 

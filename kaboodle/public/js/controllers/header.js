@@ -8,7 +8,7 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         "title": "Fields",
         "link": "fields"
     }, {
-        "title": "Articles",
-        "link": "articles"
+        "title": "Lookup Lists",
+        "link": "lists"
     }];
 }]);

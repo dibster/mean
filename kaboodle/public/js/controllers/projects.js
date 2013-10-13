@@ -18,7 +18,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         };
 
     $scope.remove = function(project) {
-        project.$remove();  
+        project.$remove();
 
         for (var i in $scope.projects) {
             if ($scope.projects[i] == project) {
