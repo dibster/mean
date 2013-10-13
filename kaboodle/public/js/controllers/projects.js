@@ -2,20 +2,20 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     $scope.global = Global;
 
     $scope.create = function() {
-        console.log("Try create");
         var project = new Projects({
-            title: this.title,
-            content: this.content
+            title: this.title
         });
+
         project.$save(function(response) {
             $location.path("projects");
         });
 
-        this.title = "";
-        this.content = "";
-        find();
+        $scope.projects.push({
+            title: this.title });
 
-    };
+        this.title = "";
+
+        };
 
     $scope.remove = function(project) {
         project.$remove();  
@@ -40,7 +40,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     };
 
     $scope.find = function(query) {
-
         Projects.query(query, function(projects) {
             $scope.projects = projects;
         });

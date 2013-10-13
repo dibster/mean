@@ -1,24 +1,22 @@
-<section data-ng-controller="ProjectsController">
+<section data-ng-controller="ProjectsController"  data-ng-init="find()">
 
     <h1 id="overview">Projects</h1>
 
     <form class="form-inline" role="form" data-ng-submit="create()">
         <div class="form-group">
             <!--<input type="text" class="form-control" id="newProjectName" placeholder="New Project ..">-->
-            <input type="text" data-ng-model="title" class="form-control" id="title" placeholder="New Project" required>
+            <input type="text" data-ng-model="title" class="form-control" id="title" placeholder="New Project" autofocus="autofocus" required>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-default">
-                <!--<a href="/#!/projects/create">Add</a>-->
-                Add
-            </button>
+            <button type="submit" class="btn btn-default">Add</button>
         </div>
     </form>
 
     <br>
 
-    <table class="table"  data-ng-init="find()">
-    <tr data-ng-repeat="project in projects">
+
+    <table class="table">
+    <tr data-ng-repeat="project in projects" data-ng-model="title">
         <td>
             <a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a>
         </td>
@@ -34,6 +32,6 @@
         </tr>
     </table>
 
-    <h1 data-ng-hide="!projects || projects.length">No projects yet. <br> Why don't you <a href="/#!/projects/create">Create One</a>?</h1>
+    <span data-ng-hide="!projects || projects.length">No projects yet</span>
 
 </section>
