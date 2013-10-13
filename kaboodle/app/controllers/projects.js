@@ -23,7 +23,6 @@ exports.project = function(req, res, next, id) {
  * Create a project
  */
 exports.create = function(req, res) {
-    console.log('Projects Create');
     var project = new Project(req.body);
     project.user = req.user;
 
@@ -80,7 +79,7 @@ exports.show = function(req, res) {
  * List of Projects
  */
 exports.all = function(req, res) {
-    console.log('Projects');
+
     Project.find().sort('-created').populate('user', 'name username').exec(function(err, projects) {
         if (err) {
             res.render('error', {

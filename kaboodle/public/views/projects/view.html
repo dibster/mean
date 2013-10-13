@@ -1,6 +1,11 @@
 <section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-	<span>{{article.created | date:'medium'}}</span> /
-	<span>{{article.user.name}}</span>
-	<h2>{{article.title}} <a data-ng-show="global.user._id == article.user._id" href="/#!/articles/{{article._id}}/edit">edit</a></h2>
-	<div>{{article.content}}</div>
+
+    <form class="form-inline" role="form" data-ng-submit="update()">
+        <br>
+        <div class="form-group">
+            <!--<input type="text" class="form-control" id="newProjectName" placeholder="New Project ..">-->
+            <input type="text" data-ng-model="project.title" class="form-control" id="title" required autofocus="autofocus" value="{{project.title}}">
+        </div>
+    </form>
+
 </section>

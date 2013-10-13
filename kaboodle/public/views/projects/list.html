@@ -1,6 +1,6 @@
 <section data-ng-controller="ProjectsController"  data-ng-init="find()">
 
-    <h1 id="overview">Projects</h1>
+    <h1 id="overview"></h1>
 
     <form class="form-inline" role="form" data-ng-submit="create()">
         <div class="form-group">
@@ -25,6 +25,10 @@
         <td>
             {{project.user.name}}
         </td>
+
+        <!--<td>-->
+            <!--{{project._id }}-->
+        <!--</td>-->
 
         </tr>
     </table>

@@ -91,9 +91,18 @@ module.exports = function(app, passport, auth) {
     app.get('/projects/:projectId', projects.show);
     app.put('/projects/:projectId', projects.update);
     app.del('/projects/:projectId', projects.destroy);
-//
-    //Finish with setting up the projectId param
     app.param('projectId', projects.project);
+  
+    //Fields
+    var fields = require('../app/controllers/fields');
+    app.get('/fields', fields.all);
+    app.post('/fields', auth.requiresLogin,  fields.create);
+    app.get('/fields/:fieldId', fields.show);
+    app.put('/fields/:fieldId', fields.update);
+    app.del('/fields/:fieldId', fields.destroy);
+//
+    //Finish with setting up the fieldId param
+    app.param('fieldId', fields.field);
 
     //Home route
     var index = require('../app/controllers/index');

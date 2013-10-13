@@ -5,6 +5,9 @@ angular.module('mean.system').controller('HeaderController', ['$scope', 'Global'
         "title": "Projects",
         "link": "projects"
     }, {
+        "title": "Fields",
+        "link": "fields"
+    }, {
         "title": "Articles",
         "link": "articles"
     }];
