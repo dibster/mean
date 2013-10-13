@@ -10,6 +10,10 @@ var mongoose = require('mongoose'),
  * Field Schema
  */
 var FieldSchema = new Schema({
+    created: {
+        type: Date,
+        default: Date.now
+    },
     title: {
         type: String,
         default: '',
@@ -22,6 +26,10 @@ var FieldSchema = new Schema({
     },
     length: {
         type: String
+    },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
     }
 });
 
