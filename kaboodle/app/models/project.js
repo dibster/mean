@@ -14,6 +14,11 @@ var ProjectSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    description: {
+        type: String,
+        default: '',
+        trim: true
+    },
     title: {
         type: String,
         default: '',
@@ -27,7 +32,7 @@ var ProjectSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
-    }
+    },fields : [{ type: Schema.ObjectId, ref: 'Field' }]
 });
 
 /**

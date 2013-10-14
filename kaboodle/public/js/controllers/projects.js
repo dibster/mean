@@ -33,6 +33,9 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
             project.updated = [];
         }
         project.updated.push(new Date().getTime());
+        console.log("Field is ");
+        console.log(project.title);
+        console.log(project.field);
 
         project.$update(function() {
             $location.path('projects/' + project._id);

@@ -43,6 +43,8 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
     var project = req.project;
+    console.log("In Backend Project Update")
+    console.log(project);
 
     project = _.extend(project, req.body);
 
