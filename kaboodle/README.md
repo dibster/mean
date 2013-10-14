@@ -94,7 +94,7 @@ If you are using node instead of grunt, it is very similar:
   * Visit us at [Linnovate.net](http://www.linnovate.net/).
   * Visit our [Ninja's Zone](http://www.meanleanstartupmachine.com/) for extended support.
 
-## Credits
+## Credits1
 Inspired by the great work of [Madhusudhan Srinivasa](https://github.com/madhums/)
 
 ## License
