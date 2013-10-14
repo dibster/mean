@@ -32,7 +32,12 @@ var ProjectSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
-    },fields : [{ type: Schema.ObjectId, ref: 'Field' }]
+    },
+    fields :
+        [{
+            type: Schema.ObjectId,
+            ref: 'Field'
+        }]
 });
 
 /**
