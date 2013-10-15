@@ -12,29 +12,24 @@ var should = require('should'),
 var user;
 var project;
 
-user = new User({
-    name: 'Full name',
-    email: 'test@test.com',
-    username: 'user',
-    password: 'password'
-});
-
-user.save();
-
-project = new Project({
-    title: 'Unit Testing Project Title 2',
-    description : 'Unit Testing Project Description',
-    user: user
-});
-
-project.save();
-
-
 
 //The tests
 describe('<Unit Test>', function() {
     describe('Model Project:', function() {
-        beforeEach(function(done) {
+        before(function(done) {
+
+            // remove projects
+
+            Project.find({}).remove();
+
+            // remove fields
+
+            Field.find({}).remove();
+
+            // remove users
+
+            User.find({username : 'user'}).remove();
+
 
             user = new User({
                 name: 'Full name',
@@ -78,13 +73,18 @@ describe('<Unit Test>', function() {
 
             it('should be able to show an error when try to save without title', function(done) {
                 project.title = '';
-
-
                 return project.save(function(err) {
                     should.exist(err);
                     done();
                 });
             });
+
+            it('Should have saved a new project record with two fields attached'), function(done) {
+                var projectname = 'Unit Testing Project Title';
+                // Look for the project
+                
+                done();
+            }
         });
 
         afterEach(function(done) {
@@ -92,3 +92,10 @@ describe('<Unit Test>', function() {
         });
     });
 });
+
+
+function removeData() {
+
+
+
+}
