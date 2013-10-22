@@ -82,7 +82,11 @@ describe('<Unit Test>', function() {
             it('Should have saved a new project record with two fields attached'), function(done) {
                 var projectname = 'Unit Testing Project Title';
                 // Look for the project
-                
+                Project.findOne({'title' : 'Unit Testing Project Title'}, 'title name', function (err,project) {
+                    if (err) return err;
+                    console.log('Found the record testing fields : ' + project.title);
+
+                })
                 done();
             }
         });
