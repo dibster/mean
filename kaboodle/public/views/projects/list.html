@@ -18,11 +18,17 @@
                 <a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a>
             </td>
             <td>
+                {{project.fields.length}}
+            </td>
+            <td>
                 {{project.created | date:'medium'}}
             </td>
             <td>
                 {{project.user.name}}
             </td>
+            <!--<td ng-repeat="column in project.fields">-->
+                <!--{{column.title}}-->
+            <!--</td>-->
 
         </tr>
     </table>

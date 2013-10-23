@@ -17,15 +17,53 @@
             </form>
         </div>
     </div>
-    <section data-ng-controller="FieldsController">
+
+    <section data-ng-controller="FieldsController"  data-ng-init="find()">
 
     <br>
     <div class="row" >
-        <h1>get the id of the title column first</h1>
+            <div class="col-md-6">
+                <div class="col-md-6">
+                    <h4> Available Columns</h4>
+                </div>
+                <div class="col-md-6">
+                    <input type="text" data-ng-model="searchText" class="form-control pull-right" id="searchText"  placeholder="Filter Columns ...">
+                </div>
+
+            <table class="table">
+                <!-- | filter:title-->
+                <tr data-ng-repeat="field in fields | filter:searchText" data-ng-model="title">
+                    <td>
+                        <a data-ng-href="#!/fields/{{field._id}}">{{field.title}}</a>
+                    </td>
+                    <td>
+                        {{field.type}}
+                    </td>
+                    <td>
+                        {{field.length}}
+                    </td>
+                </tr>
+            </table>
+        </div>
         <div class="col-md-6">
-            <input type="text" data-ng-model="field.title" class="form-control">
-            <button type="submit" class="btn btn-default" data-ng-click="findByName(field.title)">Find {{field.title}}</a></button>
-            {{field._id}} {{field.title}} {{field.user}}
+            <h4>Columns added to project : {{project.title}}</h4>
+            <table class="table">
+                <tr data-ng-repeat="column in project.fields" data-ng-model="fields">
+                    <td>
+                        <a data-ng-href="#!/fields/{{column._id}}">{{column.title}}</a>
+                    </td>
+                    <td>
+                        {{column.type}}
+                    </td>
+                    <td>
+                        {{column.length}}
+                    </td>
+                    <!--<td ng-repeat="column in project.fields">-->
+                    <!--{{column.title}}-->
+                    <!--</td>-->
+
+                </tr>
+            </table>
         </div>
     </div>
 

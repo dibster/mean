@@ -18,18 +18,11 @@ describe('<Unit Test>', function() {
     describe('Model Project:', function() {
         before(function(done) {
 
-            // remove projects
+            // remove projects, fields and users
 
-            //Project.find({}).remove();
-
-            // remove fields
-
-            //Field.find({}).remove();
-
-            // remove users
-
+            Project.find({}).remove();
+            Field.find({}).remove();
             User.find({username : 'user'}).remove();
-
 
             user = new User({
                 name: 'Full name',
@@ -50,19 +43,6 @@ describe('<Unit Test>', function() {
 
             secondField.save();
 
-//            var query = Project
-//                .findOne({'title' : 'Unit Testing Project Title'})
-//                .populate ('fields');
-//
-//            query.exec(function (err, project) {
-//                if (err) console.log(err);
-//                console.log(project.title);
-//                console.log(project.fields);
-//                });
-
-
-
-
             user.save(function(err) {
                 project = new Project({
                     title: 'Unit Testing Project Title',
@@ -74,6 +54,7 @@ describe('<Unit Test>', function() {
                 done();
             });
         });
+
 
         describe('Method Save', function() {
             it('should be able to save without problems', function(done) {

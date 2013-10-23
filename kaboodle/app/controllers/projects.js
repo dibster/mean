@@ -14,6 +14,7 @@ exports.project = function(req, res, next, id) {
     Project.load(id, function(err, project) {
         if (err) return next(err);
         if (!project) return next(new Error('Failed to load project ' + id));
+        console.log('get project');
         req.project = project;
         next();
     });
@@ -82,7 +83,7 @@ exports.show = function(req, res) {
  */
 exports.all = function(req, res) {
 
-    Project.find().sort('-created').populate('user', 'name username').exec(function(err, projects) {
+    Project.find().sort('-created').populate('user', 'name username').populate('fields').exec(function(err, projects) {
         if (err) {
             res.render('error', {
                 status: 500
