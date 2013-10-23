@@ -20,11 +20,11 @@ describe('<Unit Test>', function() {
 
             // remove projects
 
-            Project.find({}).remove();
+            //Project.find({}).remove();
 
             // remove fields
 
-            Field.find({}).remove();
+            //Field.find({}).remove();
 
             // remove users
 
@@ -49,6 +49,18 @@ describe('<Unit Test>', function() {
             });
 
             secondField.save();
+
+//            var query = Project
+//                .findOne({'title' : 'Unit Testing Project Title'})
+//                .populate ('fields');
+//
+//            query.exec(function (err, project) {
+//                if (err) console.log(err);
+//                console.log(project.title);
+//                console.log(project.fields);
+//                });
+
+
 
 
             user.save(function(err) {
@@ -79,16 +91,21 @@ describe('<Unit Test>', function() {
                 });
             });
 
-            it('Should have saved a new project record with two fields attached'), function(done) {
-                var projectname = 'Unit Testing Project Title';
-                // Look for the project
-                Project.findOne({'title' : 'Unit Testing Project Title'}, 'title name', function (err,project) {
-                    if (err) return err;
-                    console.log('Found the record testing fields : ' + project.title);
+            it('Should have saved a new project record with two fields attached', function(done) {
 
-                })
-                done();
-            }
+                var query = Project
+                    .findOne({'title' : 'Unit Testing Project Title'})
+                    .populate ('fields');
+
+                return query.exec(function (err, project) {
+                    if (err) throw err;
+                    project.title.should.equal('Unit Testing Project Title');
+                    //console.log(project.fields);
+                    project.fields[0].title.should.equal('first field');
+                    project.fields[1].title.should.equal('second field');
+                    done();
+                });
+            });
         });
 
         afterEach(function(done) {
