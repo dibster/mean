@@ -58,6 +58,7 @@ describe('<Unit Test>', function() {
 
         describe('Method Save', function() {
             it('should be able to save without problems', function(done) {
+                    console.log(project);
                     return project.save(function(err) {
                     should.not.exist(err);
                     done();
@@ -87,6 +88,39 @@ describe('<Unit Test>', function() {
                     done();
                 });
             });
+
+            it('Should add a new Column to the Project Object', function(done) {
+
+                thirdField = new Field({
+                    title : 'third field'
+                });
+
+                thirdField.save();
+
+                var query = Project
+                    .findOne({'title' : 'Unit Testing Project Title'})
+                    .populate ('fields');
+
+                query.exec(function (err, currentProject) {
+                    if (err) throw err;
+                    currentProject.fields.push(thirdField);
+                    console.log(currentProject);
+                    currentProject.save(function(err) {
+                        if(!err) {
+                            console.log("updated ");
+                        }
+                        else {
+                            console.log("Error: could not save contact " + err );
+                        }
+                    });
+                    done();
+                });
+
+
+
+            });
+
+
         });
 
         afterEach(function(done) {
@@ -94,10 +128,3 @@ describe('<Unit Test>', function() {
         });
     });
 });
-
-
-function removeData() {
-
-
-
-}
