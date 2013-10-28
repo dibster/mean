@@ -46,8 +46,7 @@ angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeP
     };
 
     $scope.find = function(query) {
-        console.log(query);
-        Fields.query(query, function(fields) {
+            Fields.query(query, function(fields) {
             $scope.fields = fields;
         });
     };
@@ -61,7 +60,7 @@ angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeP
     };
 
     $scope.findByName = function(name) {
-        console.log("find my name")
+        console.log('find my name');
         console.log(title);
         Fields.get({
             title : name

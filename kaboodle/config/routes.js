@@ -91,6 +91,7 @@ module.exports = function(app, passport, auth) {
     app.get('/projects/:projectId', projects.show);
     app.put('/projects/:projectId', projects.update);
     app.del('/projects/:projectId', projects.destroy);
+
     app.param('projectId', projects.project);
   
     //Fields

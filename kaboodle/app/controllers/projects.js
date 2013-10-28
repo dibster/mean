@@ -14,7 +14,6 @@ exports.project = function(req, res, next, id) {
     Project.load(id, function(err, project) {
         if (err) return next(err);
         if (!project) return next(new Error('Failed to load project ' + id));
-        console.log('get project');
         req.project = project;
         next();
     });
@@ -43,8 +42,11 @@ exports.create = function(req, res) {
  * Update a project
  */
 exports.update = function(req, res) {
+
+    console.log("In Backend Project Update");
+
     var project = req.project;
-    console.log("In Backend Project Update")
+
     console.log(project);
 
     project = _.extend(project, req.body);

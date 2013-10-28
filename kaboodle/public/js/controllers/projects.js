@@ -1,5 +1,7 @@
-angular.module('mean.projects').controller('ProjectsController', ['$scope', '$routeParams', '$location', 'Global', 'Projects', function ($scope, $routeParams, $location, Global, Projects) {
+angular.module('mean.projects').controller('ProjectsController', ['$scope', '$routeParams', '$location', 'Global', 'Projects','Fields', function ($scope, $routeParams, $location, Global, Projects, Fields) {
     $scope.global = Global;
+
+    $scope.dave = 'ash';
 
     $scope.create = function() {
         var project = new Projects({
@@ -27,7 +29,32 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         }
     };
 
+    $scope.addField = function() {
+        var project = $scope.project;
+        if (!project.updated) {
+            project.updated = [];
+        }
+
+        console.log($scope.project.newField);
+
+
+        var field = new Fields({
+            title: $scope.project.newField
+        });
+
+        field.$save(function(response) {
+            $location.path('projects/' + project._id);
+        });
+
+        console.log(project);
+        project.fields.push(field);
+
+        console.log('Field Added');
+
+    };
+
     $scope.update = function() {
+        console.log('In Update');
         var project = $scope.project;
         if (!project.updated) {
             project.updated = [];
@@ -35,7 +62,7 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         project.updated.push(new Date().getTime());
         console.log("Field is ");
         console.log(project.title);
-        console.log(project.field);
+
 
         project.$update(function() {
             $location.path('projects/' + project._id);
@@ -49,10 +76,12 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     };
 
     $scope.findOne = function() {
+        console.log('In Projects find one');
         Projects.get({
             projectId: $routeParams.projectId
         }, function(project) {
             $scope.project = project;
+            console.log(project);
         });
     };
 }]);
