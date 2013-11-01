@@ -1,5 +1,11 @@
 angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeParams', '$location', 'Global', 'Fields', function ($scope, $routeParams, $location, Global, Fields) {
     $scope.global = Global;
+    $scope.allowFieldEdit = false;
+
+    $scope.allowEdit = function() {
+        $scope.allowFieldEdit = !$scope.allowFieldEdit;
+    };
+
 
     $scope.create = function() {
         var field = new Fields({

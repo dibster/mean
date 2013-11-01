@@ -36,28 +36,36 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         console.log($scope.project.newField);
 
         // Does the field Exist ?
-        
+
         var fields = $scope.fields;
-        console.log(fields);
 
         var result = fields.filter(function (row) {
-            if(row.title === 'Description') {
-                return true
+            if(row.title === $scope.project.newField) {
+                return true;
             } else {
                 return false;
             }
         });
 
-        console.log(result);
+        console.log(result[0]);
 
-//        if (fields.filter('title' : 'Title'))
-//        {
-//            console.log('found Field');
-//        }
+        // if field is new add it
 
-        field.$save(function(response) {
-            $location.path('projects/' + project._id);
-        });
+        var field;
+
+        if (result.length > 0) {
+            field = result[0];
+        } else {
+            field = new Fields({
+              title: $scope.project.newField,
+              type : 'Undefined'
+            });
+
+            field.$save(function(response) {
+                $location.path('projects/' + project._id);
+            });
+        }
+
 
         console.log(project);
         project.fields.push(field);

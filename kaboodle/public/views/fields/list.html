@@ -23,7 +23,6 @@
                 <div class="form-group">
                     <input type="text" data-ng-show="type=='Number'" data-ng-model="length" class="form-control" id="length" placeholder="Length ..." required>
                 </div>
-
                 <button type="submit" class="btn btn-default">Add</button>
           </form>
         </div>
@@ -40,10 +39,17 @@
     <!-- | filter:title-->
         <tr data-ng-repeat="field in fields | filter:searchText" data-ng-model="title">
             <td>
-                <a data-ng-href="#!/fields/{{field._id}}">{{field.title}}</a>
+                <a data-ng-click="allowEdit()">{{field.title}}</a>
             </td>
             <td>
-                {{field.type}}
+                <div data-ng-show="allowFieldEdit" data-ng-controller="ReferencesController">
+                    <select data-ng-model="field.type"
+                            data-ng-options="type for type in dataTypes">
+                    </select>
+                </div>
+                <div data-ng-hide="allowFieldEdit">
+                    {{field.type}}
+                </div>
             </td>
             <td>
                 {{field.created | date:'medium'}}
