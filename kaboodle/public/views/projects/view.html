@@ -1,16 +1,17 @@
 
 <!-- Get the type ahead working HTML 5 -->
 
-<section data-ng-controller="FieldsController" data-ng-init="find()">
+<!--<section data-ng-controller="ProjectsController" data-ng-init="findOne()">-->
+
+<!--</section>-->
+
+<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
+    <br>
     <datalist id="FieldsList">
         <div data-ng-repeat="field in fields" data-ng-model="title" >
             <option value="{{field.title}}">
         </div>
     </datalist>
-</section>
-
-<section data-ng-controller="ProjectsController" data-ng-init="findOne()">
-    <br>
     <div class="row">
         <div class="col-md-8">
             <form class="form-inline" role="form" data-ng-submit="update()">
