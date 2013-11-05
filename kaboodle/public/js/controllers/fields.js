@@ -40,14 +40,14 @@ angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeP
     };
 
     $scope.update = function() {
-        var field = $scope.fields[0];
-//        if (!field.updated) {
-//            field.updated = [];
-//        }
-//        field.updated.push(new Date().getTime());
+        var field = $scope.field;
+        if (!field.updated) {
+            field.updated = [];
+        }
+        field.updated.push(new Date().getTime());
 
         field.$update(function() {
-            $location.path('fields/' + field._id);
+            $location.path('fields/');
         });
     };
 

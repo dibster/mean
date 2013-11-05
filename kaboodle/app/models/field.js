@@ -43,12 +43,12 @@ FieldSchema.path('title').validate(function(title) {
 /**
  * Statics
  */
-//FieldSchema.statics = {
-//    load: function(id, cb) {
-//        this.findOne({
-//            _id: id
-//        }).populate('user', 'name username').exec(cb);
-//    }
-//};
+FieldSchema.statics = {
+    load: function(id, cb) {
+        this.findOne({
+            _id: id
+        }).populate('user', 'name username').exec(cb);
+    }
+};
 
 mongoose.model('Field', FieldSchema);
