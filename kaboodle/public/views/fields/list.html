@@ -28,7 +28,7 @@
         </div>
 
         <div class="col-md-4">
-            <input type="text" data-ng-model="searchText" class="form-control" id="searchText" size="30" placeholder="Search Table ...">
+              <input type="text" data-ng-model="searchText" class="form-control" id="searchText" size="30" placeholder="Search Table ...">
         </div>
 
     </div>
@@ -38,6 +38,7 @@
     <table class="table">
     <!-- | filter:title-->
         <tr data-ng-repeat="field in fields | filter:searchText" data-ng-model="title">
+            <div data-ng-controller="FieldsController">
             <td>
                 <a data-ng-click="allowEdit()">{{field.title}}</a>
             </td>
@@ -57,9 +58,14 @@
             <td>
                 {{field.user.name}}
             </td>
+            <td>
+                <button type="submit" class="btn btn-mini btn-default" data-ng-click="update()">Update</button>
+            </td>
+            </div>
         </tr>
     </table>
 
     <span data-ng-hide="!fields || fields.length">No fields yet</span>
 
 </section>
+

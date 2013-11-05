@@ -23,3 +23,14 @@ footer {
 footer p {
     padding:5px 0 12px 10px
 }
+
+a {
+    color: #90AC36;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #2a6496;
+    text-decoration: underline;
+}
