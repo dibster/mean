@@ -27,6 +27,11 @@ var FieldSchema = new Schema({
     length: {
         type: String
     },
+    values :
+        [{
+            type: String
+        }],
+
     user: {
         type: Schema.ObjectId,
         ref: 'User'

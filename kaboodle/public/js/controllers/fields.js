@@ -9,8 +9,8 @@ angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeP
 
     $scope.create = function() {
         var field = new Fields({
-            title: this.title,
-            type: this.type,
+            title: this.field.title,
+            type: this.field.type,
             length : this.length
         });
 
@@ -19,8 +19,8 @@ angular.module('mean.fields').controller('FieldsController', ['$scope', '$routeP
         });
 
         $scope.fields.push({
-            title: this.title,
-            type: this.type,
+            title: this.field.title,
+            type: this.field.type,
             length: this.length
         });
 

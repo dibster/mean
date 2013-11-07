@@ -9,20 +9,21 @@
             <div class="form-group">
                 <input type="text" data-ng-model="field.title" class="form-control" id="title" required autofocus="autofocus">
             </div>
+
+            <div class="form-group" data-ng-controller="ReferencesController">
+                <select class="form-control" ng-model="field.type" data-ng-options="dataType for dataType in dataTypes"></select>
+            </div>
+            {{field.type}}
+
             <div class="form-group">
-                <select class="form-control" data-ng-model="field.type" id="type" >
-                    <option>Date</option>
-                    <option>Date and Time</option>
-                    <option>Line</option>
-                    <option>List</option>
-                    <option>Number</option>
-                    <option>Money</option>
-                    <option>Paragraph</option>
-                    <option>Users</option>
-                </select>
+            <textarea rows="6" data-ng-show="field.type=='List'" data-ng-model="field.values" class="form-control" id="values" placeholder="Values ..."></textarea>
             </div>
 
-            <button type="submit" class="btn btn-default pull-left">Update</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-default pull-left">Update</button>
+            </div>
+
+
         </form>
         </div>
 

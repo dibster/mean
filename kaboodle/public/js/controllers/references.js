@@ -10,7 +10,9 @@ angular.module('mean.references').controller('ReferencesController', ['$scope', 
         'Number',
         'Money',
         'Single Person',
-        'Team'
+        'Team',
+        'List'
+
     ];
 
 }]);

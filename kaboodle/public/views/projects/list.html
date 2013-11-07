@@ -19,7 +19,7 @@
                 <a data-ng-href="#!/projects/{{project._id}}">{{project.title}}</a>
             </td>
             <td>
-                {{project.fields.length}}
+                <span class="badge">{{project.fields.length}}</span>
             </td>
             <td>
                 {{project.created | date:'medium'}}

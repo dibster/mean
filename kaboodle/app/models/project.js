@@ -36,7 +36,10 @@ var ProjectSchema = new Schema({
     fields :
         [{
             type: Schema.ObjectId,
-            ref: 'Field'
+            ref: 'Field',
+            multiple: {
+                type: String
+            }
         }]
 });
 
