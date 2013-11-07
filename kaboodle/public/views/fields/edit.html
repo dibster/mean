@@ -13,7 +13,6 @@
             <div class="form-group" data-ng-controller="ReferencesController">
                 <select class="form-control" ng-model="field.type" data-ng-options="dataType for dataType in dataTypes"></select>
             </div>
-            {{field.type}}
 
             <div class="form-group">
             <textarea rows="6" data-ng-show="field.type=='List'" data-ng-model="field.values" class="form-control" id="values" placeholder="Values ..."></textarea>

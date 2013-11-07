@@ -32,23 +32,26 @@ describe('<Unit Test>', function() {
             });
 
             firstField = new Field({
-                title : 'first field'
+                title : 'Title',
+                type : 'Line'
             });
 
             firstField.save();
 
             secondField = new Field({
-                title : 'second field'
+                title : 'Description',
+                type : 'Para'
             });
 
             secondField.save();
 
             user.save(function(err) {
                 project = new Project({
-                    title: 'Unit Testing Project Title',
-                    description : 'Unit Testing Project Description',
+                    title: 'Project',
+                    description : 'Base Kaboodle Project',
                     user: user,
-                    fields : [firstField._id, secondField._id]
+                    fields : [firstField._id, secondField._id],
+                    fieldReferences: [{'field' : firstField, isFieldRequired: 'Yes'},{'field' : secondField, isFieldRequired: 'No'}]
                 });
 
                 done();
@@ -76,15 +79,15 @@ describe('<Unit Test>', function() {
             it('Should have saved a new project record with two fields attached', function(done) {
 
                 var query = Project
-                    .findOne({'title' : 'Unit Testing Project Title'})
+                    .findOne({'title' : 'Project'})
                     .populate ('fields');
 
                 return query.exec(function (err, project) {
                     if (err) throw err;
-                    project.title.should.equal('Unit Testing Project Title');
+                    project.title.should.equal('Project');
                     //console.log(project.fields);
-                    project.fields[0].title.should.equal('first field');
-                    project.fields[1].title.should.equal('second field');
+                    project.fields[0].title.should.equal('Title');
+                    project.fields[1].title.should.equal('Description');
                     done();
                 });
             });
@@ -92,13 +95,13 @@ describe('<Unit Test>', function() {
             it('Should add a new Column to the Project Object', function(done) {
 
                 thirdField = new Field({
-                    title : 'third field'
+                    title : 'Status'
                 });
 
                 thirdField.save();
 
                 var query = Project
-                    .findOne({'title' : 'Unit Testing Project Title'})
+                    .findOne({'title' : 'Project'})
                     .populate ('fields');
 
                 query.exec(function (err, currentProject) {
@@ -115,8 +118,37 @@ describe('<Unit Test>', function() {
                     });
                     done();
                 });
+            });
+
+            it('Should add a field and related CRUD data to a project', function(done) {
+
+                var fourthField = new Field({
+                    title : 'Start Date'
+                });
+                var validationData = 'Required';
+
+                fourthField.save();
 
 
+                var query = Project
+                    .findOne({'title' : 'Project'})
+                    .populate ('fieldReferences.field');
+
+
+                query.exec(function (err, currentProject) {
+                    if (err) throw err;
+                    console.log(currentProject);
+//                    currentProject.fieldReferences.push(fourthField,'Required');
+//                    currentProject.save(function(err) {
+//                        if(!err) {
+//                            console.log("updated ");
+//                        }
+//                        else {
+//                            console.log("Error: could not save project " + err );
+//                        }
+//                    });
+                    done();
+                });
 
             });
 

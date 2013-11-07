@@ -27,7 +27,21 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         }
     };
 
+    $scope.removeField = function(field) {
+
+        console.log('Remove Field : ' + field.title);
+        var project=$scope.project;
+
+        project.fields.splice(project.fields.indexOf('field',1));
+
+        $scope.updateRequired='true';
+
+
+
+    };
+
     $scope.addField = function() {
+        $scope.updateRequired='true';
         var project = $scope.project;
         if (!project.updated) {
             project.updated = [];
@@ -75,13 +89,14 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     };
 
     $scope.update = function() {
+        $scope.updateRequired='';
         console.log('In Update');
         var project = $scope.project;
         if (!project.updated) {
             project.updated = [];
         }
         project.updated.push(new Date().getTime());
-        console.log("Field is ");
+        console.log("Project is ");
         console.log(project.title);
 
 

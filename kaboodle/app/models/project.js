@@ -36,11 +36,20 @@ var ProjectSchema = new Schema({
     fields :
         [{
             type: Schema.ObjectId,
-            ref: 'Field',
-            multiple: {
-                type: String
-            }
-        }]
+            ref: 'Field'
+        }],
+    fieldReferences: [
+        {
+            field : {
+                type: Schema.ObjectId,
+                ref: 'Field'
+            },
+            isFieldRequired : {
+                    type: String,
+                    required: false
+                }
+        }
+    ]
 });
 
 /**
