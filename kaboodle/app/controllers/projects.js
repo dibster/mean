@@ -43,17 +43,32 @@ exports.create = function(req, res) {
  */
 exports.update = function(req, res) {
 
-    console.log("In Backend Project Update");
+    function AddFieldsFromTemplate(project, sourceProjectName) {
+        console.log('Find : ' + sourceProjectName);
+        Project.findOne({ title: 'Project'},
+           function (err, baseProject) {
+                if (baseProject) {
+                    var thisProject = req.project;
+                    thisProject.fields = baseProject.fields;
+                    thisProject.save(function(err) {
+                        res.jsonp(thisProject);
+                    });
 
-    console.log('Query String, copy fields from : ' + req.param('copyFieldsFrom'));
+               }
+           }).populate('fields');
+    }
 
-    var project = req.project;
 
-    project = _.extend(project, req.body);
-
-    project.save(function(err) {
-        res.jsonp(project);
-    });
+    if (req.param('copyFieldsFrom') === 'Project') {
+        AddFieldsFromTemplate(req.project,'Project');
+    } else {
+        // do simple update
+        var project = req.project;
+        project = _.extend(project, req.body);
+        project.save(function(err) {
+            res.jsonp(project);
+        });
+    }
 };
 
 /**
@@ -78,14 +93,6 @@ exports.destroy = function(req, res) {
  */
 exports.show = function(req, res) {
     console.log('in Show');
-    res.jsonp(req.project);
-};
-
-/**
- *Copy a project
- */
-exports.copyProject = function(req, res) {
-    console.log('in Copy');
     res.jsonp(req.project);
 };
 
