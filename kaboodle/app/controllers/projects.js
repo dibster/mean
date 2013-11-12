@@ -45,9 +45,9 @@ exports.update = function(req, res) {
 
     console.log("In Backend Project Update");
 
-    var project = req.project;
+    console.log('Query String, copy fields from : ' + req.param('copyFieldsFrom'));
 
-    console.log(project);
+    var project = req.project;
 
     project = _.extend(project, req.body);
 
@@ -74,17 +74,26 @@ exports.destroy = function(req, res) {
 };
 
 /**
- * Show an project
+ * Show a project
  */
 exports.show = function(req, res) {
+    console.log('in Show');
+    res.jsonp(req.project);
+};
+
+/**
+ *Copy a project
+ */
+exports.copyProject = function(req, res) {
+    console.log('in Copy');
     res.jsonp(req.project);
 };
 
 /**
  * List of Projects
- */
+s */
 exports.all = function(req, res) {
-
+    console.log('in all');
     Project.find().sort('-created').populate('user', 'name username').populate('fields').exec(function(err, projects) {
         if (err) {
             res.render('error', {

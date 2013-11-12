@@ -2,20 +2,24 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     $scope.global = Global;
 
     $scope.create = function() {
+        $scope.updateRequired='true';
         var project = new Projects({
             title: this.title
         });
 
-        project.$save(function(response) {
-            $location.path("projects");
-        });
 
         $scope.projects.push({
             title: this.title });
 
         this.title = "";
 
-        };
+        project.$save(function(response) {
+            $location.path("projects");
+        });
+
+        $scope.find();
+
+    };
 
     $scope.remove = function(project) {
         project.$remove();
@@ -25,6 +29,17 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
                 $scope.projects.splice(i, 1);
             }
         }
+        $location.path("projects");
+    };
+
+    $scope.copyProject = function() {
+       console.log($scope.project);
+        var project = $scope.project;
+        console.log(project.title);
+        project.$update({copyFieldsFrom : 'Project'},function() {
+               console.log('what should the URL be');
+        });
+
     };
 
     $scope.removeField = function(field) {
@@ -35,8 +50,6 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
         project.fields.splice(project.fields.indexOf('field',1));
 
         $scope.updateRequired='true';
-
-
 
     };
 
@@ -106,9 +119,13 @@ angular.module('mean.projects').controller('ProjectsController', ['$scope', '$ro
     };
 
     $scope.find = function(query) {
+
+
         Projects.query(query, function(projects) {
             $scope.projects = projects;
+
         });
+
     };
 
     $scope.findOne = function() {

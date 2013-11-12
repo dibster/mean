@@ -23,35 +23,22 @@
 
         <div class="col-md-6">
             <div class="btn-group pull-right">
-                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
-                    Action <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" role="menu">
-                    <li><a href="#!/projects" data-ng-click="remove(project)">Remove</a></li>
-                    <li><a href="#">Copy Project Fields</a></li>
-
-                </ul>
+                <button type="button" data-ng-click="copyProject()" class="btn btn-default">Copy Project</button>
+                <button type="button" class="btn btn-danger" data-ng-click="remove(project)">Delete</button>
             </div>
         </div>
     </div>
-
     <br>
-
     <div class="row" >
-
         <div class="col-md-6">
             <input type="text" data-ng-model="project.newField"  class="form-control pull-left" id="field" placeholder="Add Field ..." list="FieldsList">
         </div>
-
-
         <div class="col-md-6">
             <button class="btn btn-default" ng-click="addField()">Add</button>
             <button class="btn btn-success" data-ng-show="updateRequired" ng-click="update()" >Update</button>
         </div>
-
         <br>
         <br>
-
         <div class="col-md-12">
             <table class="table">
                 <tr data-ng-repeat="column in project.fields" data-ng-model="project.fields">

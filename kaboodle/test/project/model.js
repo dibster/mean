@@ -25,7 +25,7 @@ describe('<Unit Test>', function() {
             User.find({username : 'user'}).remove();
 
             user = new User({
-                name: 'Full name',
+                name: 'Kaboodle',
                 email: 'test@test.com',
                 username: 'user',
                 password: 'password'

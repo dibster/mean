@@ -89,6 +89,10 @@ module.exports = function(app, passport, auth) {
     app.get('/projects', projects.all);
     app.post('/projects', auth.requiresLogin,  projects.create);
     app.get('/projects/:projectId', projects.show);
+    //
+    // do the update with a parameter string ?copy='title'
+    //
+
     app.put('/projects/:projectId', projects.update);
     app.del('/projects/:projectId', projects.destroy);
 
